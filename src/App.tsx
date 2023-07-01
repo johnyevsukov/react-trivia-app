@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "./logo.svg";
 import { Game } from "./components/pages/Game/Game";
+import * as styles from "./styles";
 
 function App() {
   return (
-    <div className="App">
+    <styles.BackgroundWrapper>
       <Game />
-    </div>
+    </styles.BackgroundWrapper>
   );
 }
 
