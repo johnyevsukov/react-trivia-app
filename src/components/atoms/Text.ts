@@ -1,13 +1,13 @@
 import styled, { css } from "styled-components";
 import { colors, colorType } from "../../colors";
 
-const fontWeight = {
+export const fontWeights = {
   regular: 400,
   medium: 500,
   bold: 700,
 };
 
-const fontSize = {
+export const fontSizeCss = {
   sm: css`
     font-size: 12px;
     line-height: 14px;
@@ -31,8 +31,8 @@ export const Text = styled.p<{
   $weight?: "regular" | "medium" | "bold";
   $color?: colorType;
 }>`
-  ${({ $size }) => ($size ? fontSize[$size] : fontSize.md)};
+  ${({ $size }) => ($size ? fontSizeCss[$size] : fontSizeCss.md)};
   font-weight: ${({ $weight }) =>
-    $weight ? fontWeight[$weight] : fontWeight.regular};
+    $weight ? fontWeights[$weight] : fontWeights.regular};
   color: ${({ $color }) => ($color ? colors[$color] : colors.textBlack)};
 `;

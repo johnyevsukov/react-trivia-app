@@ -1,18 +1,22 @@
-import React from "react";
-import { PaddingContainer } from "../../atoms/PaddingContainer";
-import { Text } from "../../atoms/Text";
-import * as styles from "./styles";
+import React, { useState } from "react";
+import { HomeScreen } from "../HomeScreen/HomeScreen";
+import { MainMenu } from "../MainMenu/MainMenu";
+
+export type gameScreens = "home" | "mainMenu" | "activeGame" | "score";
 
 export const Game = () => {
-  return (
-    <styles.Wrapper>
-      <PaddingContainer>
-        <styles.MainMenuCard>
-          <Text $size="xl" $weight="bold">
-            TRIVIA
-          </Text>
-        </styles.MainMenuCard>
-      </PaddingContainer>
-    </styles.Wrapper>
-  );
+  const [gameStack, setGameStack] = useState<gameScreens[]>(["home"]);
+  const renderGameScreen = (
+    gameStack: gameScreens[],
+    setGameStack: React.Dispatch<React.SetStateAction<gameScreens[]>>
+  ) => {
+    const currentStep = gameStack[gameStack.length - 1];
+    if (currentStep === "home") {
+      return <HomeScreen setGameStack={setGameStack} />;
+    } else if (currentStep === "mainMenu") {
+      return <MainMenu setGameStack={setGameStack} />;
+    } else return;
+  };
+
+  return <>{renderGameScreen(gameStack, setGameStack)}</>;
 };
