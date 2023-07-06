@@ -4,7 +4,7 @@ import { Text } from "./components/atoms/Text";
 
 export const BackgroundWrapper = styled.div`
   background: ${colors.pastelPurple};
-  height: 100vh;
+  height: 100svh;
   width: 100%;
 `;
 

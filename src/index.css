@@ -6,7 +6,6 @@
 
 html {
   line-sizing: normal;
-  height: -webkit-fill-available;
 }
 
 body {
@@ -17,7 +16,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  height: -webkit-fill-available;
 }
 
 [hidden] {
