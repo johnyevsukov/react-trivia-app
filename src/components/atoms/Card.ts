@@ -10,10 +10,10 @@ export const Card = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   z-index: 1;
   width: 100%;
-  min-width: 410px;
   max-width: 450px;
 
   @media (min-width: 768px) {
     padding: 64px;
+    min-width: 410px;
   }
 `;
