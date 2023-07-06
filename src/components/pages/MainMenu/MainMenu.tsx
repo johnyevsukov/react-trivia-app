@@ -165,6 +165,7 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                   options={difficulties}
                   onChange={(e) => handleSelectChange(e, "difficulty")}
                   styles={selectStyles}
+                  isSearchable={false}
                 />
               </VStack>
               <VStack $spacing={10}>
@@ -174,6 +175,7 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                   options={categories}
                   onChange={(e) => handleSelectChange(e, "category")}
                   styles={selectStyles}
+                  isSearchable={false}
                 />
               </VStack>
               <VStack $spacing={10}>
@@ -183,6 +185,7 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                   options={questions}
                   onChange={(e) => handleSelectChange(e, "questions")}
                   styles={selectStyles}
+                  isSearchable={false}
                 />
               </VStack>
               <FlexBox>
