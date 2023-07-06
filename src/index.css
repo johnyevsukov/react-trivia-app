@@ -20,10 +20,6 @@ body {
   height: -webkit-fill-available;
 }
 
-body > #root > div {
-  height: 100vh;
-}
-
 [hidden] {
   display: none;
 }
