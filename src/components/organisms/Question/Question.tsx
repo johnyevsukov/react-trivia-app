@@ -1,39 +1,49 @@
 import React, { useState, useCallback } from "react";
-import { Text } from "../../atoms/Text";
-import * as styles from "./styles";
+
 import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
 import { TextBubble } from "../../atoms/TextBubble";
 
+import useSound from "use-sound";
+import correctSfx from "../../../sounds/correct.mp3";
+import incorrectSfx from "../../../sounds/incorrect.mp3";
+
+import { scoreType } from "../../../types/gameTypes";
+import { gameQuestionType } from "../../../types/gameTypes";
+
+import * as styles from "./styles";
+
 interface QuestionProps {
-  question: any;
-  handleNextQuestion: any;
-  setScoreStack: any;
-  isLastQuestion: any;
-  handleShowScoreScreen: any;
+  question: gameQuestionType;
+  handleNextQuestion: () => void;
+  handleAddScore: (score: scoreType) => void;
+  isLastQuestion: boolean;
+  setScoreScreen: () => void;
 }
 
 export const Question: React.FC<QuestionProps> = ({
   question,
   handleNextQuestion,
-  setScoreStack,
+  handleAddScore,
   isLastQuestion,
-  handleShowScoreScreen,
+  setScoreScreen,
 }) => {
   const [currentChoice, setCurrentChoice] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [correct] = useSound(correctSfx);
+  const [incorrect] = useSound(incorrectSfx);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
     setCurrentChoice(value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setScoreStack((state: any) => [
-      ...state,
-      currentChoice === question.correct ? "correct" : "incorrect",
-    ]);
+    currentChoice === question.correct ? correct() : incorrect();
+    handleAddScore(
+      currentChoice === question.correct ? "correct" : "incorrect"
+    );
     setIsAnswered(true);
   };
 
@@ -53,7 +63,7 @@ export const Question: React.FC<QuestionProps> = ({
       );
     } else {
       return (
-        <Button type="button" $variant="purple" onClick={handleShowScoreScreen}>
+        <Button type="button" $variant="purple" onClick={setScoreScreen}>
           See score
         </Button>
       );
@@ -62,47 +72,45 @@ export const Question: React.FC<QuestionProps> = ({
 
   return (
     <VStack $spacing={20}>
-      <form onSubmit={handleSubmit}>
+      <VStack $spacing={20} as="form" onSubmit={handleSubmit}>
         <VStack $spacing={20}>
-          <VStack $spacing={20}>
-            <TextBubble>
-              <styles.QuestionText
-                dangerouslySetInnerHTML={{ __html: question.question }}
-              />
-            </TextBubble>
-            <VStack $spacing={10}>
-              {question.choices.map((c: any) => {
-                return (
-                  <styles.ChoiceWrapper
+          <TextBubble>
+            <styles.QuestionText
+              dangerouslySetInnerHTML={{ __html: question.question }}
+            />
+          </TextBubble>
+          <VStack $spacing={10}>
+            {question.choices.map((c: any) => {
+              return (
+                <styles.ChoiceWrapper
+                  $isAnswered={isAnswered}
+                  $correct={c === question.correct}
+                >
+                  <styles.RadioInput
                     $isAnswered={isAnswered}
                     $correct={c === question.correct}
-                  >
-                    <styles.RadioInput
-                      $isAnswered={isAnswered}
-                      $correct={c === question.correct}
-                      type="radio"
-                      name="question"
-                      onChange={handleChange}
-                      checked={c === currentChoice}
-                      value={c}
-                      disabled={isAnswered}
-                    />
-                    <styles.RadioInputLabel
-                      dangerouslySetInnerHTML={{ __html: c }}
-                    />
-                    <styles.SelectCircle />
-                  </styles.ChoiceWrapper>
-                );
-              })}
-            </VStack>
+                    type="radio"
+                    name="question"
+                    onChange={handleChange}
+                    checked={c === currentChoice}
+                    value={c}
+                    disabled={isAnswered}
+                  />
+                  <styles.RadioInputLabel
+                    dangerouslySetInnerHTML={{ __html: c }}
+                  />
+                  <styles.SelectCircle />
+                </styles.ChoiceWrapper>
+              );
+            })}
           </VStack>
-          {!isAnswered && (
-            <Button type="submit" $variant="purple" disabled={!currentChoice}>
-              Submit
-            </Button>
-          )}
         </VStack>
-      </form>
+        {!isAnswered && (
+          <Button type="submit" $variant="purple" disabled={!currentChoice}>
+            Submit
+          </Button>
+        )}
+      </VStack>
       {isAnswered && renderNextButton()}
     </VStack>
   );

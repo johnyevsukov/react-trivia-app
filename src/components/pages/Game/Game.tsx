@@ -1,60 +1,75 @@
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
+
 import { HomeScreen } from "../HomeScreen/HomeScreen";
 import { MainMenu } from "../MainMenu/MainMenu";
 import { ActiveGame } from "../ActiveGame/ActiveGame";
+import { ScoreScreen } from "../ScoreScreen/ScoreScreen";
 
-export type gameScreens = "home" | "mainMenu" | "activeGame" | "score";
+import { gameScreenType } from "../../../types/gameTypes";
+import { scoreType } from "../../../types/gameTypes";
+import { apiQuestionType } from "../../../types/gameTypes";
+import { gameQuestionType } from "../../../types/gameTypes";
 
 export const Game = () => {
-  const [score, setScore] = useState([]);
-  const [category, setCategory] = useState("");
-  const [gameStack, setGameStack] = useState<gameScreens[]>(["home"]);
-  const [gameQuestions, setGameQuestions] = useState([]);
+  const [gameScreenStack, setGameScreenStack] = useState<gameScreenType[]>([
+    "homeScreen",
+  ]);
+  const [gameQuestions, setGameQuestions] = useState<gameQuestionType[]>([]);
+  const [scoreStack, setScoreStack] = useState<scoreType[]>([]);
 
-  const shuffleArray = (array: any) => {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-  };
-
-  const initializeGameQuestions = (questions: any) => {
-    const reorganizedQuestions = questions.map((question: any, i: any) => {
+  const initializeGameQuestions = (questions: apiQuestionType[]) => {
+    const restructuredQuestions = questions.map((question: any) => {
       const choices = question.incorrect_answers;
       choices.push(question.correct_answer);
-      shuffleArray(choices);
+      const shuffledChoices = choices.sort(() => Math.random() - 0.5);
+
       return {
-        id: i,
         question: question.question,
         correct: question.correct_answer,
-        choices: choices,
+        choices: shuffledChoices,
       };
     });
-    setGameQuestions(reorganizedQuestions);
+
+    setGameQuestions(restructuredQuestions);
   };
 
-  const renderGameScreen = (
-    gameStack: gameScreens[],
-    setGameStack: React.Dispatch<React.SetStateAction<gameScreens[]>>
-  ) => {
+  const handleNextScreen = useCallback((screen: gameScreenType) => {
+    setGameScreenStack((s) => [...s, screen]);
+  }, []);
+
+  const handleAddScore = useCallback((score: scoreType) => {
+    setScoreStack((s) => [...s, score]);
+  }, []);
+
+  const renderGameScreen = (gameStack: gameScreenType[]) => {
     const currentStep = gameStack[gameStack.length - 1];
-    if (currentStep === "home") {
-      return <HomeScreen setGameStack={setGameStack} />;
-    } else if (currentStep === "mainMenu") {
+
+    if (currentStep === "homeScreen") {
+      return <HomeScreen handleNextScreen={handleNextScreen} />;
+    } else if (currentStep === "mainMenuScreen") {
       return (
         <MainMenu
-          setGameStack={setGameStack}
+          handleNextScreen={handleNextScreen}
           initializeGameQuestions={initializeGameQuestions}
         />
       );
-    } else if (currentStep === "activeGame" && gameQuestions) {
+    } else if (currentStep === "activeGameScreen" && gameQuestions) {
       return (
-        <ActiveGame setGameStack={setGameStack} gameQuestions={gameQuestions} />
+        <ActiveGame
+          handleNextScreen={handleNextScreen}
+          gameQuestions={gameQuestions}
+          handleAddScore={handleAddScore}
+        />
+      );
+    } else if (currentStep === "scoreScreen") {
+      return (
+        <ScoreScreen
+          scoreStack={scoreStack}
+          totalQuestions={gameQuestions.length}
+        />
       );
     } else return;
   };
 
-  return <>{renderGameScreen(gameStack, setGameStack)}</>;
+  return <>{renderGameScreen(gameScreenStack)}</>;
 };

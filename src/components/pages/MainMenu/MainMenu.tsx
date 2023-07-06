@@ -1,127 +1,119 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button } from "../../molecules/Button";
-import { gameScreens } from "../Game/Game";
-import { BooksIcon } from "../../atoms/icons/BooksIcon";
-import { CameraIcon } from "../../atoms/icons/CameraIcon";
-import { ControllerIcon } from "../../atoms/icons/ControllerIcon";
-import { DiskIcon } from "../../atoms/icons/DiskIcon";
-import { GlobeIcon } from "../../atoms/icons/GlobeIcon";
-import { MusicIcon } from "../../atoms/icons/MusicIcon";
-import { ShuffleIcon } from "../../atoms/icons/ShuffleIcon";
-import { SoccerIcon } from "../../atoms/icons/SoccerIcon";
-import { TriangleDownIcon } from "../../atoms/icons/TriangleDownIcon";
-import { Text } from "../../atoms/Text";
+import Select from "react-select";
 import { selectStyles } from "./selectStyles";
+
+import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
-import Select from "react-select";
 import { Title } from "../../atoms/Title";
 import { Wrapper } from "../../atoms/Wrapper";
 import { FlexBox } from "../../atoms/Box";
+
+import useSound from "use-sound";
+import { PlayFunction } from "use-sound/dist/types";
+import clickSfx from "../../../sounds/click.mp3";
+import startSfx from "../../../sounds/start.mp3";
+
+import { gameScreenType } from "../../../types/gameTypes";
+import { categoryChoiceType } from "../../../types/gameTypes";
+import { difficultyChoiceType } from "../../../types/gameTypes";
+import { questionsChoiceType } from "../../../types/gameTypes";
+import { apiQuestionType } from "../../../types/gameTypes";
+
 import axios from "axios";
 import * as yup from "yup";
 import * as styles from "./styles";
 
-interface HomeScreenProps {
-  setGameStack: React.Dispatch<React.SetStateAction<gameScreens[]>>;
-  initializeGameQuestions: any;
+const difficulties: difficultyChoiceType[] = [
+  {
+    value: "easy",
+    label: "Easy",
+  },
+  {
+    value: "medium",
+    label: "Medium",
+  },
+  {
+    value: "hard",
+    label: "Hard",
+  },
+  {
+    value: "mixed",
+    label: "Mixed",
+  },
+];
+const questions: questionsChoiceType[] = [
+  { label: "5", value: "5" },
+  { label: "10", value: "10" },
+  { label: "15", value: "15" },
+  { label: "20", value: "20" },
+];
+const categories: categoryChoiceType[] = [
+  {
+    value: "18",
+    label: "Computer Science",
+  },
+  {
+    value: "15",
+    label: "Video Games",
+  },
+  {
+    value: "23",
+    label: "History",
+  },
+  {
+    value: "22",
+    label: "Geography",
+  },
+  {
+    value: "21",
+    label: "Sports",
+  },
+  {
+    value: "11",
+    label: "Film",
+  },
+  {
+    value: "12",
+    label: "Music",
+  },
+  {
+    value: "9",
+    label: "Mixed",
+  },
+];
+
+interface MainMenuProps {
+  handleNextScreen: (screen: gameScreenType) => void;
+  initializeGameQuestions: (questions: apiQuestionType[]) => void;
 }
-export const MainMenu: React.FC<HomeScreenProps> = ({
-  setGameStack,
+export const MainMenu: React.FC<MainMenuProps> = ({
+  handleNextScreen,
   initializeGameQuestions,
 }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [click] = useSound<PlayFunction>(clickSfx);
+  const [start] = useSound<PlayFunction>(startSfx);
+
   const [formValues, setFormValues] = useState({
     difficulty: "",
     category: "",
-    questions: "",
+    questions: [],
   });
-  const [formErrors, setFormErrors] = useState({
-    difficulty: "",
-    category: "",
-    questions: "",
-  });
-  const [disabled, setDisabled] = useState(true);
 
-  const difficulties = [
-    {
-      value: "easy",
-      label: "Easy",
-    },
-    {
-      value: "medium",
-      label: "Medium",
-    },
-    {
-      value: "hard",
-      label: "Hard",
-    },
-    {
-      value: "mixed",
-      label: "Mixed",
-    },
-  ];
-  const questions = [
-    { label: "5", value: "5" },
-    { label: "10", value: "10" },
-    { label: "15", value: "15" },
-    { label: "20", value: "20" },
-  ];
-  const categories = [
-    {
-      value: "18",
-      label: "Computer Science",
-    },
-    {
-      value: "15",
-      label: "Video Games",
-    },
-    {
-      value: "23",
-      label: "History",
-    },
-    {
-      value: "22",
-      label: "Geography",
-    },
-    {
-      value: "21",
-      label: "Sports",
-    },
-    {
-      value: "11",
-      label: "Film",
-    },
-    {
-      value: "12",
-      label: "Music",
-    },
-    {
-      value: "9",
-      label: "Mixed",
-    },
-  ];
-
-  const categoryIconMap: any = {
-    18: <DiskIcon />,
-    15: <ControllerIcon />,
-    23: <BooksIcon />,
-    22: <GlobeIcon />,
-    21: <SoccerIcon />,
-    11: <CameraIcon />,
-    12: <MusicIcon />,
-    9: <ShuffleIcon />,
-  };
-
-  const handleDifficulty = () => {
+  const handleDifficulty = useCallback(() => {
     if (formValues.difficulty === "mixed") {
-      return;
+      return "";
     } else {
       return `&difficulty=${formValues.difficulty}`;
     }
-  };
+  }, []);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    start();
+    setIsLoading(true);
     axios
       .get(
         `https://opentdb.com/api.php?amount=${formValues.questions}&category=${
@@ -130,15 +122,20 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
       )
       .then((res) => {
         initializeGameQuestions(res.data.results);
-        setGameStack((state) => [...state, "activeGame"]);
-        console.log(res);
+        handleNextScreen("activeGameScreen");
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.warn(err);
+        setIsLoading(false);
       });
   };
 
-  const handleSelectChange = (e: any, name: string) => {
+  const handleSelectChange = (
+    e: any,
+    name: "difficulty" | "category" | "questions"
+  ) => {
+    click();
     setFormValues({
       ...formValues,
       [name]: e.value,
@@ -147,7 +144,7 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
 
   useEffect(() => {
     validationSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
+      setIsDisabled(!valid);
     });
   }, [formValues]);
 
@@ -159,7 +156,9 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
           <styles.Form onSubmit={handleSubmit}>
             <VStack $spacing={24} $spacingMobile={16}>
               <VStack $spacing={10}>
-                <styles.SelectLabel>Difficulty:</styles.SelectLabel>
+                <styles.SelectLabel as="label" htmlFor="difficulty">
+                  Difficulty:
+                </styles.SelectLabel>
                 <Select
                   name="difficulty"
                   options={difficulties}
@@ -169,7 +168,9 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                 />
               </VStack>
               <VStack $spacing={10}>
-                <styles.SelectLabel>Category:</styles.SelectLabel>
+                <styles.SelectLabel as="label" htmlFor="category">
+                  Category:
+                </styles.SelectLabel>
                 <Select
                   name="category"
                   options={categories}
@@ -179,7 +180,9 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                 />
               </VStack>
               <VStack $spacing={10}>
-                <styles.SelectLabel>Questions:</styles.SelectLabel>
+                <styles.SelectLabel as="label" htmlFor="questions">
+                  Questions:
+                </styles.SelectLabel>
                 <Select
                   name="questions"
                   options={questions}
@@ -189,9 +192,13 @@ export const MainMenu: React.FC<HomeScreenProps> = ({
                 />
               </VStack>
               <FlexBox>
-                <Button disabled={disabled} $variant="purple" type="submit">
-                  Start
-                </Button>
+                {isLoading ? (
+                  <>loading</>
+                ) : (
+                  <Button disabled={isDisabled} $variant="purple" type="submit">
+                    Start
+                  </Button>
+                )}
               </FlexBox>
             </VStack>
           </styles.Form>

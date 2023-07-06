@@ -8,6 +8,10 @@ export const fontWeights = {
 };
 
 export const fontSizeCss = {
+  xs: css`
+    font-size: 12px;
+    line-height: 14px;
+  `,
   sm: css`
     font-size: 16px;
     line-height: 18px;
@@ -27,7 +31,7 @@ export const fontSizeCss = {
 };
 
 export const Text = styled.p<{
-  $size?: "sm" | "md" | "lg" | "xl";
+  $size?: "xs" | "sm" | "md" | "lg" | "xl";
   $weight?: "regular" | "medium" | "bold";
   $align?: "center" | "left" | "right";
   $color?: colorType;

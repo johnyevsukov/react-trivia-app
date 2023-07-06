@@ -23,7 +23,6 @@ export const Form = styled.form`
 export const SelectLabel = styled(Text).attrs({
   $size: "sm",
   $weight: "bold",
-  as: "label",
 })`
   font-family: "Press Start 2P";
 

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { fontSizeCss, fontWeights } from "../../atoms/Text";
-import { colors } from "../../../colors";
 import { Text } from "../../atoms/Text";
+import { colors } from "../../../colors";
 
 const choiceWrapperBackgroundCss = (isAnswered: boolean, correct: boolean) => {
   if (!isAnswered) {
