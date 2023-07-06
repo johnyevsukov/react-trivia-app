@@ -38,11 +38,36 @@ const buttonVariantCss = {
       background: ${colors.gray};
     }
   `,
+  blue: css`
+    background: ${colors.calmBlue};
+    color: ${colors.offWhite};
+
+    &:hover,
+    &:focus {
+      background: ${colors.lightBlue};
+    }
+  `,
+  purple: css`
+    background: ${colors.pastelPurple};
+    color: ${colors.offWhite};
+
+    &:hover,
+    &:focus {
+      background: ${colors.lightPastelPurple};
+      color: ${colors.textBlack};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${colors.lighterPastelPurple};
+      color: ${colors.lightGray};
+    }
+  `,
 };
 
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
-  $variant?: "black";
+  $variant?: "black" | "blue" | "purple";
 }>`
   ${baseButtonCss}
   ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)}

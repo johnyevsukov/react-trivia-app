@@ -9,12 +9,12 @@ export const fontWeights = {
 
 export const fontSizeCss = {
   sm: css`
-    font-size: 12px;
-    line-height: 14px;
-  `,
-  md: css`
     font-size: 16px;
     line-height: 18px;
+  `,
+  md: css`
+    font-size: 18px;
+    line-height: 20px;
   `,
   lg: css`
     font-size: 22px;
@@ -29,10 +29,12 @@ export const fontSizeCss = {
 export const Text = styled.p<{
   $size?: "sm" | "md" | "lg" | "xl";
   $weight?: "regular" | "medium" | "bold";
+  $align?: "center" | "left" | "right";
   $color?: colorType;
 }>`
   ${({ $size }) => ($size ? fontSizeCss[$size] : fontSizeCss.md)};
   font-weight: ${({ $weight }) =>
     $weight ? fontWeights[$weight] : fontWeights.regular};
   color: ${({ $color }) => ($color ? colors[$color] : colors.textBlack)};
+  text-align: ${({ $align }) => ($align ? $align : "left")};
 `;
