@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
-import { Title } from "../../atoms/Title";
+import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
 import { FlexBox } from "../../atoms/Box";
 import { TextBubble } from "../../atoms/TextBubble";
@@ -28,7 +28,7 @@ export const ScoreScreen: React.FC<ScoreScreenProps> = ({
     <Wrapper>
       <Card>
         <VStack $spacing={24}>
-          <Title>Score</Title>
+          <Heading>Score</Heading>
           <TextBubble>
             <styles.ScoreText $size="lg" $weight="bold" $align="center">
               You answered {correctQuestions} out of {totalQuestions} questions

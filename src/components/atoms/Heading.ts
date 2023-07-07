@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Text } from "./Text";
 import { fontSizeCss } from "./Text";
 
-export const Title = styled(Text).attrs({
+export const Heading = styled(Text).attrs({
   $weight: "bold",
   as: "h1",
 })`

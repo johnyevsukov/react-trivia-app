@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
-import { Title } from "../../atoms/Title";
+import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
 import { FlexBox } from "../../atoms/Box";
 
@@ -27,7 +27,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
     <Wrapper>
       <Card>
         <VStack $spacing={32} $spacingMobile={24}>
-          <Title>TRIVIA</Title>
+          <Heading>TRIVIA</Heading>
           <FlexBox>
             <Button onClick={handleStartClick} $variant="purple">
               Start

@@ -5,9 +5,10 @@ import { selectStyles } from "./selectStyles";
 import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
-import { Title } from "../../atoms/Title";
+import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
 import { FlexBox } from "../../atoms/Box";
+import { Loader } from "../../atoms/Loader";
 
 import useSound from "use-sound";
 import { PlayFunction } from "use-sound/dist/types";
@@ -152,7 +153,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     <Wrapper>
       <Card>
         <VStack $spacing={32} $spacingMobile={24}>
-          <Title>Settings</Title>
+          <Heading>Settings</Heading>
           <styles.Form onSubmit={handleSubmit}>
             <VStack $spacing={24} $spacingMobile={16}>
               <VStack $spacing={10}>
@@ -193,7 +194,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
               </VStack>
               <FlexBox>
                 {isLoading ? (
-                  <>loading</>
+                  <Loader />
                 ) : (
                   <Button disabled={isDisabled} $variant="purple" type="submit">
                     Start

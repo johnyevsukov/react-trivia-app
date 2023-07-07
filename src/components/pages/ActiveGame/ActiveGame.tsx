@@ -2,7 +2,7 @@ import React, { useCallback, useState, useMemo } from "react";
 
 import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
-import { Title } from "../../atoms/Title";
+import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
 import { Question } from "../../organisms/Question/Question";
 
@@ -47,7 +47,7 @@ export const ActiveGame: React.FC<ActiveGameProps> = ({
           <styles.QuestionCount>
             {`${questionNumber + 1}/${gameQuestions.length}`}
           </styles.QuestionCount>
-          <Title>{"category"}</Title>
+          <Heading>{"category"}</Heading>
           <Question
             question={currentQuestion}
             isLastQuestion={isLastQuestion}
