@@ -59,6 +59,7 @@ export const DifficultyTextWrapper = styled.div<{
   border-radius: 10px;
   transform: rotate(-45deg);
   width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   ${({ $difficulty }) => getDifficultyTextBackgroundColor($difficulty)}
 
   @media (min-width: 768px) {
