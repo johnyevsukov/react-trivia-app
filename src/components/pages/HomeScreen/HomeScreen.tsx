@@ -5,7 +5,7 @@ import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
 import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
-import { FlexBox } from "../../atoms/Box";
+import { FlexBox } from "../../atoms/FlexBox";
 
 import useSound from "use-sound";
 import clickSfx from "../../../sounds/click.mp3";

@@ -49,17 +49,17 @@ export const ActiveGame: React.FC<ActiveGameProps> = ({
   return (
     <Wrapper>
       <Card>
-        <VStack $spacing={25}>
-          <styles.HiddenOverflowContainer>
-            <styles.DifficultyTextWrapper $difficulty={difficultyChoice}>
-              <styles.DifficultyText>{difficultyChoice}</styles.DifficultyText>
-            </styles.DifficultyTextWrapper>
-          </styles.HiddenOverflowContainer>
-          <styles.QuestionCountTextWrapper>
-            <styles.QuestionCountText>
-              {`${questionNumber + 1}/${gameQuestions.length}`}
-            </styles.QuestionCountText>
-          </styles.QuestionCountTextWrapper>
+        <styles.HiddenOverflowContainer>
+          <styles.DifficultyTextWrapper $difficulty={difficultyChoice}>
+            <styles.DifficultyText>{difficultyChoice}</styles.DifficultyText>
+          </styles.DifficultyTextWrapper>
+        </styles.HiddenOverflowContainer>
+        <styles.QuestionCountTextWrapper>
+          <styles.QuestionCountText>
+            {`${questionNumber + 1}/${gameQuestions.length}`}
+          </styles.QuestionCountText>
+        </styles.QuestionCountTextWrapper>
+        <VStack $spacing={25} $marginTop={20}>
           <Heading>{categoryChoice}</Heading>
           <Question
             question={currentQuestion}

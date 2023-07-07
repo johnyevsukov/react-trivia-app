@@ -7,7 +7,7 @@ import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
 import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
-import { FlexBox } from "../../atoms/Box";
+import { FlexBox } from "../../atoms/FlexBox";
 import { Loader } from "../../atoms/Loader";
 
 import useSound from "use-sound";

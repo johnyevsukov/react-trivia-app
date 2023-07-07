@@ -4,10 +4,13 @@ export const VStack = styled.div<{
   $spacing: number;
   $spacingMobile?: number;
   $width?: string;
+  $marginTop?: number;
 }>`
   display: flex;
   flex-direction: column;
   width: ${({ $width }) => ($width ? $width : "100%")};
+  margin-top: ${({ $marginTop }) => ($marginTop ? `${$marginTop}px` : null)};
+
   > * {
     margin-bottom: ${({ $spacing, $spacingMobile }) =>
       $spacingMobile ? `${$spacingMobile}px` : `${$spacing}px`};

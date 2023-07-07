@@ -53,8 +53,8 @@ export const DifficultyTextWrapper = styled.div<{
   $difficulty: difficultyValueType;
 }>`
   position: absolute;
-  top: 20px;
-  left: -68px;
+  top: 22px;
+  left: -67px;
   padding: 2px;
   border-radius: 10px;
   transform: rotate(-45deg);

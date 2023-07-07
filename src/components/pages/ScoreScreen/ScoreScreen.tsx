@@ -5,7 +5,7 @@ import { VStack } from "../../atoms/VStack";
 import { Card } from "../../atoms/Card";
 import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
-import { FlexBox } from "../../atoms/Box";
+import { FlexBox } from "../../atoms/FlexBox";
 import { TextBubble } from "../../atoms/TextBubble";
 
 import { scoreType } from "../../../types/gameTypes";
