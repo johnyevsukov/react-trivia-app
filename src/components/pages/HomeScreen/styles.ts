@@ -8,8 +8,8 @@ export const GithubLink = styled.a`
   cursor: pointer;
   right: 15px;
   bottom: 15px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   transition: all 0.1s ease-in-out;
   border-radius: 50%;
 
@@ -17,6 +17,11 @@ export const GithubLink = styled.a`
   &:focus {
     transform: rotate(20deg);
     box-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
+  }
+
+  @media (min-width: 768px) {
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -67,9 +72,4 @@ export const DifficultyTextWrapper = styled.div`
     left: -57px;
     padding: 5px;
   }
-`;
-
-export const LinkIconWrapper = styled.div`
-  width: 40px;
-  height: 40px;
 `;
