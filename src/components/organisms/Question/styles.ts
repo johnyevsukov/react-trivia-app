@@ -6,16 +6,16 @@ import { colors } from "../../../colors";
 const choiceWrapperBackgroundCss = (isAnswered: boolean, correct: boolean) => {
   if (!isAnswered) {
     return css`
-      background: ${colors.pastelPurple};
+      background: ${colors.purple3};
     `;
   } else {
     if (correct) {
       return css`
-        background: ${colors.lightGreen};
+        background: ${colors.green1};
       `;
     } else {
       return css`
-        background: ${colors.lightRed};
+        background: ${colors.red1};
       `;
     }
   }
@@ -50,19 +50,19 @@ export const RadioInputLabel = styled.label`
 const checkedInputCss = (isAnswered: boolean, correct: boolean) => {
   if (!isAnswered) {
     return css`
-      background: ${colors.lightPastelPurple};
-      border: 4px solid ${colors.darkPastelPurple};
+      background: ${colors.purple2};
+      border: 4px solid ${colors.purple4};
     `;
   } else {
     if (correct) {
       return css`
-        background: ${colors.lightGreen2};
-        border: 4px solid ${colors.lightGreen3};
+        background: ${colors.green2};
+        border: 4px solid ${colors.green3};
       `;
     } else {
       return css`
-        background: ${colors.lightRed2};
-        border: 4px solid ${colors.lightRed3};
+        background: ${colors.red2};
+        border: 4px solid ${colors.red3};
       `;
     }
   }
@@ -80,7 +80,7 @@ const checkedInputLabelCss = (isAnswered: boolean, correct: boolean) => {
     `;
   } else {
     return css`
-      color: ${colors.lightRed3};
+      color: ${colors.red3};
     `;
   }
 };

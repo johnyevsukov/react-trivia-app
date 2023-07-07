@@ -35,39 +35,30 @@ const buttonVariantCss = {
 
     &:hover,
     &:focus {
-      background: ${colors.gray};
-    }
-  `,
-  blue: css`
-    background: ${colors.calmBlue};
-    color: ${colors.offWhite};
-
-    &:hover,
-    &:focus {
-      background: ${colors.lightBlue};
+      background: ${colors.gray2};
     }
   `,
   purple: css`
-    background: ${colors.pastelPurple};
+    background: ${colors.purple3};
     color: ${colors.offWhite};
 
     &:hover,
     &:focus {
-      background: ${colors.lightPastelPurple};
+      background: ${colors.purple2};
       color: ${colors.textBlack};
     }
 
     &:disabled {
       cursor: not-allowed;
-      background: ${colors.lighterPastelPurple};
-      color: ${colors.lightGray};
+      background: ${colors.purple1};
+      color: ${colors.gray1};
     }
   `,
 };
 
 export const Button = styled.button<{
   $size?: "sm" | "md" | "lg";
-  $variant?: "black" | "blue" | "purple";
+  $variant?: "black" | "purple";
 }>`
   ${baseButtonCss}
   ${({ $size }) => ($size ? buttonSizeCss[$size] : buttonSizeCss.lg)}

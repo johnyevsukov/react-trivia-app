@@ -3,7 +3,7 @@ import { colors } from "./colors";
 import { Text } from "./components/atoms/Text";
 
 export const BackgroundWrapper = styled.div`
-  background: ${colors.pastelPurple};
+  background: ${colors.purple3};
   height: 100svh;
   width: 100%;
 `;

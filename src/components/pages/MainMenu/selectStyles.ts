@@ -13,14 +13,14 @@ export const selectStyles = {
     border: "none",
     borderRadius: state.menuIsOpen ? "36px 36px 0 0" : "36px",
     padding: "2px 6px",
-    background: `${colors.pastelPurple}`,
+    background: `${colors.purple3}`,
     cursor: "pointer",
     boxShadow: state.menuIsOpen
       ? "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
       : "none",
 
     "&:hover": {
-      background: `${colors.lightPastelPurple}`,
+      background: `${colors.purple2}`,
     },
 
     "@media (min-width: 768px)": {
@@ -47,7 +47,7 @@ export const selectStyles = {
     border: 0,
     outline: 0,
     padding: "0 8px",
-    background: `${colors.pastelPurple}`,
+    background: `${colors.purple3}`,
     overflowY: "scroll",
     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
   }),
@@ -60,7 +60,7 @@ export const selectStyles = {
     lineHeight: "20px",
     fontWeight: `${fontWeights.bold}`,
     padding: "10px 0",
-    borderTop: `2px solid ${colors.darkPastelPurple}`,
+    borderTop: `2px solid ${colors.purple4}`,
 
     "@media (min-width: 768px)": {
       fontSize: "22px",
@@ -72,10 +72,10 @@ export const selectStyles = {
     marginTop: "2px",
     width: "100%",
     cursor: "pointer",
-    background: `${colors.pastelPurple}`,
+    background: `${colors.purple3}`,
     borderRadius: "36px",
     "&:hover": {
-      background: `${colors.lightPastelPurple}`,
+      background: `${colors.purple2}`,
     },
     "&:first-of-type": {
       marginTop: "0px",

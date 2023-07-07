@@ -10,8 +10,8 @@ const spin = keyframes`
   }`;
 
 export const Loader = styled.div`
-  border: 10px solid ${colors.lightPastelPurple};
-  border-top: 10px solid ${colors.darkPastelPurple};
+  border: 10px solid ${colors.purple2};
+  border-top: 10px solid ${colors.purple4};
   border-radius: 50%;
   width: 48px;
   height: 48px;
