@@ -15,9 +15,11 @@ import { PlayFunction } from "use-sound/dist/types";
 import clickSfx from "../../../sounds/click.mp3";
 import startSfx from "../../../sounds/start.mp3";
 
-import { gameScreenType } from "../../../types/gameTypes";
+import { categoryValueType, gameScreenType } from "../../../types/gameTypes";
 import { categoryChoiceType } from "../../../types/gameTypes";
+import { categoryLabelType } from "../../../types/gameTypes";
 import { difficultyChoiceType } from "../../../types/gameTypes";
+import { difficultyValueType } from "../../../types/gameTypes";
 import { questionsChoiceType } from "../../../types/gameTypes";
 import { apiQuestionType } from "../../../types/gameTypes";
 
@@ -87,10 +89,18 @@ const categories: categoryChoiceType[] = [
 interface MainMenuProps {
   handleNextScreen: (screen: gameScreenType) => void;
   initializeGameQuestions: (questions: apiQuestionType[]) => void;
+  setCategoryChoice: React.Dispatch<
+    React.SetStateAction<categoryLabelType | undefined>
+  >;
+  setDifficultyChoice: React.Dispatch<
+    React.SetStateAction<difficultyValueType | undefined>
+  >;
 }
 export const MainMenu: React.FC<MainMenuProps> = ({
   handleNextScreen,
   initializeGameQuestions,
+  setCategoryChoice,
+  setDifficultyChoice,
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,7 +110,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
   const [formValues, setFormValues] = useState({
     difficulty: "",
     category: "",
-    questions: [],
+    questions: "",
   });
 
   const handleDifficulty = useCallback(() => {
@@ -123,6 +133,10 @@ export const MainMenu: React.FC<MainMenuProps> = ({
       )
       .then((res) => {
         initializeGameQuestions(res.data.results);
+        setCategoryChoice(
+          categories.filter((c) => c.value === formValues.category)[0].label
+        );
+        setDifficultyChoice(formValues.difficulty as difficultyValueType);
         handleNextScreen("activeGameScreen");
         setIsLoading(false);
       })

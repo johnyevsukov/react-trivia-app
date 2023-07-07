@@ -9,8 +9,10 @@ export const Heading = styled(Text).attrs({
   font-family: "Press Start 2P";
   text-align: center;
   ${fontSizeCss.lg}
+  line-height: 28px;
 
   @media (min-width: 768px) {
     ${fontSizeCss.xl}
+    line-height: 38px;
   }
 `;

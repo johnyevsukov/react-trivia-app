@@ -9,12 +9,17 @@ import { gameScreenType } from "../../../types/gameTypes";
 import { scoreType } from "../../../types/gameTypes";
 import { apiQuestionType } from "../../../types/gameTypes";
 import { gameQuestionType } from "../../../types/gameTypes";
+import { categoryLabelType } from "../../../types/gameTypes";
+import { difficultyValueType } from "../../../types/gameTypes";
 
 export const Game = () => {
   const [gameScreenStack, setGameScreenStack] = useState<gameScreenType[]>([
     "homeScreen",
   ]);
   const [gameQuestions, setGameQuestions] = useState<gameQuestionType[]>([]);
+  const [categoryChoice, setCategoryChoice] = useState<categoryLabelType>();
+  const [difficultyChoice, setDifficultyChoice] =
+    useState<difficultyValueType>();
   const [scoreStack, setScoreStack] = useState<scoreType[]>([]);
 
   const initializeGameQuestions = (questions: apiQuestionType[]) => {
@@ -51,14 +56,23 @@ export const Game = () => {
         <MainMenu
           handleNextScreen={handleNextScreen}
           initializeGameQuestions={initializeGameQuestions}
+          setCategoryChoice={setCategoryChoice}
+          setDifficultyChoice={setDifficultyChoice}
         />
       );
-    } else if (currentStep === "activeGameScreen" && gameQuestions) {
+    } else if (
+      currentStep === "activeGameScreen" &&
+      gameQuestions &&
+      categoryChoice &&
+      difficultyChoice
+    ) {
       return (
         <ActiveGame
           handleNextScreen={handleNextScreen}
           gameQuestions={gameQuestions}
           handleAddScore={handleAddScore}
+          categoryChoice={categoryChoice}
+          difficultyChoice={difficultyChoice}
         />
       );
     } else if (currentStep === "scoreScreen") {

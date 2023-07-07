@@ -9,6 +9,8 @@ import { Question } from "../../organisms/Question/Question";
 import { gameScreenType } from "../../../types/gameTypes";
 import { scoreType } from "../../../types/gameTypes";
 import { gameQuestionType } from "../../../types/gameTypes";
+import { categoryLabelType } from "../../../types/gameTypes";
+import { difficultyValueType } from "../../../types/gameTypes";
 
 import * as styles from "./styles";
 
@@ -16,11 +18,15 @@ interface ActiveGameProps {
   handleNextScreen: (screen: gameScreenType) => void;
   gameQuestions: gameQuestionType[];
   handleAddScore: (score: scoreType) => void;
+  categoryChoice: categoryLabelType;
+  difficultyChoice: difficultyValueType;
 }
 export const ActiveGame: React.FC<ActiveGameProps> = ({
   handleNextScreen,
   gameQuestions,
   handleAddScore,
+  categoryChoice,
+  difficultyChoice,
 }) => {
   const [questionNumber, setQuestionNumber] = useState(0);
 
@@ -44,10 +50,17 @@ export const ActiveGame: React.FC<ActiveGameProps> = ({
     <Wrapper>
       <Card>
         <VStack $spacing={25}>
-          <styles.QuestionCount>
-            {`${questionNumber + 1}/${gameQuestions.length}`}
-          </styles.QuestionCount>
-          <Heading>{"category"}</Heading>
+          <styles.HiddenOverflowContainer>
+            <styles.DifficultyTextWrapper $difficulty={difficultyChoice}>
+              <styles.DifficultyText>{difficultyChoice}</styles.DifficultyText>
+            </styles.DifficultyTextWrapper>
+          </styles.HiddenOverflowContainer>
+          <styles.QuestionCountTextWrapper>
+            <styles.QuestionCountText>
+              {`${questionNumber + 1}/${gameQuestions.length}`}
+            </styles.QuestionCountText>
+          </styles.QuestionCountTextWrapper>
+          <Heading>{categoryChoice}</Heading>
           <Question
             question={currentQuestion}
             isLastQuestion={isLastQuestion}

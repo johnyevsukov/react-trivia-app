@@ -76,7 +76,7 @@ const checkedInputLabelCss = (isAnswered: boolean, correct: boolean) => {
   }
   if (correct) {
     return css`
-      color: ${colors.pineGreen};
+      color: ${colors.green4};
     `;
   } else {
     return css`
@@ -103,7 +103,7 @@ export const RadioInput = styled.input<{
 
   ~ label {
     color: ${({ $isAnswered, $correct }) =>
-      $isAnswered && $correct ? colors.pineGreen : null};
+      $isAnswered && $correct ? colors.green4 : null};
   }
 
   &:checked {
