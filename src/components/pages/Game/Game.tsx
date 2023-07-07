@@ -75,11 +75,17 @@ export const Game = () => {
           difficultyChoice={difficultyChoice}
         />
       );
-    } else if (currentStep === "scoreScreen") {
+    } else if (
+      currentStep === "scoreScreen" &&
+      categoryChoice &&
+      difficultyChoice
+    ) {
       return (
         <ScoreScreen
           scoreStack={scoreStack}
           totalQuestions={gameQuestions.length}
+          categoryChoice={categoryChoice}
+          difficultyChoice={difficultyChoice}
         />
       );
     } else return;

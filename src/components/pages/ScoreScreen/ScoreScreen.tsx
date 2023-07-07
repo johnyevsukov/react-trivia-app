@@ -9,16 +9,22 @@ import { FlexBox } from "../../atoms/FlexBox";
 import { TextBubble } from "../../atoms/TextBubble";
 
 import { scoreType } from "../../../types/gameTypes";
+import { categoryLabelType } from "../../../types/gameTypes";
+import { difficultyValueType } from "../../../types/gameTypes";
 
 import * as styles from "./styles";
 
 interface ScoreScreenProps {
   scoreStack: scoreType[];
   totalQuestions: number;
+  categoryChoice: categoryLabelType;
+  difficultyChoice: difficultyValueType;
 }
 export const ScoreScreen: React.FC<ScoreScreenProps> = ({
   scoreStack,
   totalQuestions,
+  categoryChoice,
+  difficultyChoice,
 }) => {
   const correctQuestions = useMemo(() => {
     return scoreStack.filter((s: any) => s === "correct").length;

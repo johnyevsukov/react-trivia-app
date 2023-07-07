@@ -7,10 +7,14 @@ import { Heading } from "../../atoms/Heading";
 import { Wrapper } from "../../atoms/Wrapper";
 import { FlexBox } from "../../atoms/FlexBox";
 
+import { GithubIcon } from "../../atoms/icons/GithubIcon";
+
 import useSound from "use-sound";
 import clickSfx from "../../../sounds/click.mp3";
 
 import { gameScreenType } from "../../../types/gameTypes";
+
+import * as styles from "./styles";
 
 interface HomeScreenProps {
   handleNextScreen: (screen: gameScreenType) => void;
@@ -26,6 +30,18 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
   return (
     <Wrapper>
       <Card>
+        <styles.HiddenOverflowContainer>
+          <styles.DifficultyTextWrapper>
+            <styles.TextLink
+              as="a"
+              href="https://john-yevsukov-portfolio.webflow.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              My Site
+            </styles.TextLink>
+          </styles.DifficultyTextWrapper>
+        </styles.HiddenOverflowContainer>
         <VStack $spacing={32} $spacingMobile={24}>
           <Heading>TRIVIA</Heading>
           <FlexBox>
@@ -34,6 +50,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
             </Button>
           </FlexBox>
         </VStack>
+        <styles.GithubLink
+          href="https://github.com/johnyevsukov/react-trivia-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GithubIcon />
+        </styles.GithubLink>
       </Card>
     </Wrapper>
   );
