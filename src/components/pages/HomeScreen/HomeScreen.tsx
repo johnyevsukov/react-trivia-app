@@ -31,7 +31,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
     <Wrapper>
       <Card>
         <styles.HiddenOverflowContainer>
-          <styles.DifficultyTextWrapper>
+          <styles.WebsiteBanner>
             <styles.TextLink
               as="a"
               href="https://john-yevsukov-portfolio.webflow.io/"
@@ -40,7 +40,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
             >
               My Site
             </styles.TextLink>
-          </styles.DifficultyTextWrapper>
+          </styles.WebsiteBanner>
         </styles.HiddenOverflowContainer>
         <VStack $spacing={32} $spacingMobile={24}>
           <Heading>TRIVIA</Heading>

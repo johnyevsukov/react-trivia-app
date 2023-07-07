@@ -25,8 +25,6 @@ export const GithubLink = styled.a`
   }
 `;
 
-export const WebsiteBanner = styled.div``;
-
 export const TextLink = styled(Text).attrs({
   $weight: "bold",
   $size: "sm",
@@ -54,7 +52,7 @@ export const HiddenOverflowContainer = styled.div`
   overflow: hidden;
 `;
 
-export const DifficultyTextWrapper = styled.div`
+export const WebsiteBanner = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
