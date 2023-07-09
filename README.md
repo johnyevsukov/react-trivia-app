@@ -1,8 +1,8 @@
 ## React Trivia App
 
-- A triva application created to quiz users' knowledge on a variety of topics, built with React, TypeScript, and CSS. This utilizes the [open trvia API](https://opentdb.com/api_config.php).
+### [Play online](https://react-trivia-app-ten.vercel.app/) &larr;
 
-### [Play here online](https://react-trivia-app-ten.vercel.app/)
+- A triva application created to quiz users' knowledge on a variety of topics, built with React, TypeScript, and CSS. This utilizes the [open trvia API](https://opentdb.com/api_config.php).
 
 ## Project Screen Shot(s)
 
