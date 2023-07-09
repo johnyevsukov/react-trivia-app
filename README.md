@@ -3,7 +3,7 @@
 ### [Play Online](https://react-trivia-app-ten.vercel.app/) &larr;
 
 - A triva application created to quiz users' knowledge on a variety of topics, built with React, TypeScript, and CSS.
-- This utilizes the [open trvia API](https://opentdb.com/api_config.php).
+- Utilizes the [open trvia API](https://opentdb.com/api_config.php).
 - Hosted on [Vercel](https://vercel.com/).
 
 ## Screen Shots
