@@ -1,10 +1,10 @@
 ## React Trivia App
 
-### [Play online](https://react-trivia-app-ten.vercel.app/) &larr;
+### [Play Online](https://react-trivia-app-ten.vercel.app/) &larr;
 
 - A triva application created to quiz users' knowledge on a variety of topics, built with React, TypeScript, and CSS. This utilizes the [open trvia API](https://opentdb.com/api_config.php).
 
-## Project Screen Shot(s)
+## Project Screen Shots
 
 <img width="1440" alt="Screen Shot 2023-07-09 at 1 21 49 AM" src="https://github.com/johnyevsukov/react-trivia-app/assets/10480867/f268c5e6-acc7-47a8-9689-2140e845cbcd">
 <img width="1440" alt="Screen Shot 2023-07-09 at 1 22 50 AM" src="https://github.com/johnyevsukov/react-trivia-app/assets/10480867/a56af6ed-7a37-4386-a567-0fe23ffc0469">
@@ -15,10 +15,13 @@
 - Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
 - Installation:
-  `npm install`
+
+`npm install`
 
 - To Start Server:
-  `npm start`
+
+`npm start`
 
 - To Visit App:
-  `localhost:3000`
+
+`localhost:3000`
