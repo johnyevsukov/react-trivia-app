@@ -32,11 +32,11 @@ export const ActiveGame: React.FC<ActiveGameProps> = ({
 
   const isLastQuestion = useMemo(() => {
     return questionNumber + 1 === gameQuestions.length;
-  }, [questionNumber]);
+  }, [questionNumber, gameQuestions.length]);
 
   const currentQuestion = useMemo(() => {
     return gameQuestions[questionNumber];
-  }, [questionNumber]);
+  }, [questionNumber, gameQuestions]);
 
   const handleNextQuestion = useCallback(() => {
     setQuestionNumber((s) => s + 1);
@@ -44,7 +44,7 @@ export const ActiveGame: React.FC<ActiveGameProps> = ({
 
   const setScoreScreen = useCallback(() => {
     handleNextScreen("scoreScreen");
-  }, []);
+  }, [handleNextScreen]);
 
   return (
     <Wrapper>

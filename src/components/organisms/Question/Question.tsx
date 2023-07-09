@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
 import { Button } from "../../molecules/Button";
 import { VStack } from "../../atoms/VStack";
@@ -54,7 +54,7 @@ export const Question: React.FC<QuestionProps> = ({
     setIsAnswered(false);
   };
 
-  const renderNextButton = useCallback(() => {
+  const renderNextButton = () => {
     if (!isLastQuestion) {
       return (
         <Button type="button" $variant="purple" onClick={nextQuestion}>
@@ -68,7 +68,7 @@ export const Question: React.FC<QuestionProps> = ({
         </Button>
       );
     }
-  }, [isAnswered]);
+  };
 
   return (
     <VStack $spacing={20}>
@@ -80,9 +80,10 @@ export const Question: React.FC<QuestionProps> = ({
             />
           </TextBubble>
           <VStack $spacing={10}>
-            {question.choices.map((c: any) => {
+            {question.choices.map((c: any, i: number) => {
               return (
                 <styles.ChoiceWrapper
+                  key={i}
                   $isAnswered={isAnswered}
                   $correct={c === question.correct}
                 >

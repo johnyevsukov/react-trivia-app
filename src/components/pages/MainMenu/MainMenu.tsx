@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { selectStyles } from "./selectStyles";
 
@@ -15,7 +15,7 @@ import { PlayFunction } from "use-sound/dist/types";
 import clickSfx from "../../../sounds/click.mp3";
 import startSfx from "../../../sounds/start.mp3";
 
-import { categoryValueType, gameScreenType } from "../../../types/gameTypes";
+import { gameScreenType } from "../../../types/gameTypes";
 import { categoryChoiceType } from "../../../types/gameTypes";
 import { categoryLabelType } from "../../../types/gameTypes";
 import { difficultyChoiceType } from "../../../types/gameTypes";
@@ -113,13 +113,13 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     questions: "",
   });
 
-  const handleDifficulty = useCallback(() => {
+  const handleDifficulty = () => {
     if (formValues.difficulty === "mixed") {
       return "";
     } else {
       return `&difficulty=${formValues.difficulty}`;
     }
-  }, []);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

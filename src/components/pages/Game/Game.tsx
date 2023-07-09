@@ -84,8 +84,6 @@ export const Game = () => {
         <ScoreScreen
           scoreStack={scoreStack}
           totalQuestions={gameQuestions.length}
-          categoryChoice={categoryChoice}
-          difficultyChoice={difficultyChoice}
         />
       );
     } else return;
