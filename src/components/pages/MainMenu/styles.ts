@@ -1,6 +1,5 @@
-import styled, { keyframes } from "styled-components";
-import { colors } from "../../../colors";
-import { Text, fontSizeCss, fontWeights } from "../../atoms/Text";
+import styled from "styled-components";
+import { Text, fontSizeCss } from "../../atoms/Text";
 
 export const MainMenuCard = styled.div`
   position: relative;
