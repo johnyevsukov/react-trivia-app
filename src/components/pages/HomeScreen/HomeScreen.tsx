@@ -34,7 +34,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ handleNextScreen }) => {
           <styles.WebsiteBanner>
             <styles.TextLink
               as="a"
-              href="https://john-yevsukov-portfolio.webflow.io/"
+              href="https://www.john.engineering/"
               target="_blank"
               rel="noopener noreferrer"
             >
