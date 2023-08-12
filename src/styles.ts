@@ -4,10 +4,12 @@ import { Text } from "./components/atoms/Text";
 
 export const BackgroundWrapper = styled.div`
   background: ${colors.purple3};
-  /* vh fallback for older browser versions */
-  min-height: 100vh;
   height: 100svh;
   width: 100%;
+
+  @media (min-width: 768px) {
+    min-height: 100vh;
+  }
 `;
 
 const animate = keyframes`
